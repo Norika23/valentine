@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For You ❤️</title>
+  <meta name="description" content="A small Valentine page." />
+  <style>
+    :root { --bg1:#fff1f6; --bg2:#f1f5ff; --card:#ffffffcc; --text:#1f2937; }
+    * { box-sizing: border-box; }
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 20%, var(--bg1), transparent 60%),
+                  radial-gradient(1200px 600px at 80% 30%, var(--bg2), transparent 60%),
+                  linear-gradient(180deg, #fff, #fafafa);
+      padding: 18px;
+    }
+    .wrap{ width:min(560px, 100%); }
+    .card{
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid #ffffff;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+    }
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border-radius: 999px;
+      background:#ffffff; border:1px solid #f3f4f6;
+      font-size: 13px;
+    }
+    .heart{ font-size: 18px; }
+    h1{ margin: 8px 0 4px; font-size: 28px; letter-spacing:-.02em; }
+    p{ margin: 10px 0; line-height: 1.6; }
+    .hint{ opacity: .72; font-size: 13px; }
+    .row{ display:flex; gap:10px; margin-top: 14px; }
+    input{
+      flex:1;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      outline: none;
+      font-size: 16px;
+      background:#fff;
+    }
+    button{
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #111827;
+      background:#111827;
+      color:#fff;
+      font-size:16px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    button.secondary{
+      background:#fff; color:#111827; border:1px solid #e5e7eb;
+    }
+    .error{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background:#fff1f2;
+      border: 1px solid #fecdd3;
+      color:#9f1239;
+      font-size: 14px;
+    }
+    .reveal{ display:none; margin-top: 14px; }
+    .big{
+      font-size: 18px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background:#fff;
+      border:1px solid #f3f4f6;
+    }
+    .choices{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px; }
+    .footer{
+      margin-top: 14px; font-size: 12px; opacity:.7; text-align:center;
+    }
+    .sparkle{ animation: float 2.8s ease-in-out infinite; display:inline-block; }
+    @keyframes float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="card">
+      <div class="top">
+        <div class="badge"><span class="heart">❤️</span> Valentine’s note</div>
+        <div class="badge"><span class="sparkle">✨</span> made just for you</div>
+      </div>
+
+      <h1>Hey you.</h1>
+      <p>
+        I made a tiny page instead of a long speech.
+        Because you already know how I feel… but I still wanted to say it in my way.
+      </p>
+      <p class="hint">
+        Enter the passcode to open your message.
+        (Hint: it’s <b>VALENTINE</b> right now — you can change it to anything.)
+      </p>
+
+      <div class="row">
+        <input id="code" type="text" inputmode="text" autocomplete="off" placeholder="Passcode" />
+        <button id="openBtn">Open</button>
+      </div>
+
+      <div class="error" id="error">Nope 😌 Try again.</div>
+
+      <div class="reveal" id="reveal">
+        <div class="big" id="messageBox">
+          <p><b>Happy Valentine’s Day, my love.</b> ❤️</p>
+          <p>
+            Being with you makes my world softer, brighter, and a lot more fun.
+            Thank you for choosing me, for laughing with me, and for making the ordinary feel special.
+          </p>
+          <p>
+            I’m crazy about you — and I can’t wait for more dates, more kisses,
+            and more “just us” moments.
+          </p>
+          <p><b>Love,</b><br><span id="sign">— (your name)</span></p>
+        </div>
+
+        <div class="choices">
+          <button class="secondary" data-variant="cute">Make it extra cute</button>
+          <button class="secondary" data-variant="spicy">A little spicy</button>
+          <button class="secondary" data-variant="simple">Short & sweet</button>
+        </div>
+      </div>
+
+      <div class="footer">Tip: edit the passcode + your name in the script at the bottom.</div>
+    </div>
+  </div>
+
+  <script>
+    // ✅ EDIT HERE
+    const PASSCODE = "VALENTINE"; // change this to something personal (e.g., "APRIL17")
+    const SIGN_NAME = "— Ryuno-ri"; // put your name / nickname
+
+    // Optional: customize messages
+    const variants = {
+      cute: `
+        <p><b>Happy Valentine’s Day, beautiful.</b> ❤️</p>
+        <p>
+          I’m honestly obsessed with you — your smile, your voice, your everything.
+          Thank you for being you, and for letting me be close to you.
+        </p>
+        <p>
+          If you’re wondering… yes, I want more hugs, more dates,
+          and more nights where time disappears with you.
+        </p>
+        <p><b>Love,</b><br><span>__SIGN__</span></p>
+      `,
+      spicy: `
+        <p><b>Happy Valentine’s Day, baby.</b> ❤️</p>
+        <p>
+          You make me want you in the sweetest way — and in the not-so-sweet way too.
+          I can’t stop thinking about you.
+        </p>
+        <p>
+          Tonight, I’m keeping you all to myself (at least in my imagination 😉).
+        </p>
+        <p><b>Yours,</b><br><span>__SIGN__</span></p>
+      `,
+      simple: `
+        <p><b>Happy Valentine’s Day.</b> ❤️</p>
+        <p>
+          I love you. I’m grateful for you. I choose you.
+        </p>
+        <p><b>Always,</b><br><span>__SIGN__</span></p>
+      `
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const code = $("code");
+    const openBtn = $("openBtn");
+    const error = $("error");
+    const reveal = $("reveal");
+    const sign = $("sign");
+    const messageBox = $("messageBox");
+
+    sign.textContent = SIGN_NAME;
+
+    function normalize(s){
+      return (s || "").trim().toUpperCase();
+    }
+
+    function openMessage(){
+      const ok = normalize(code.value) === normalize(PASSCODE);
+      error.style.display = ok ? "none" : "block";
+      reveal.style.display = ok ? "block" : "none";
+      if(ok){
+        // a tiny flourish
+        messageBox.animate(
+          [{ transform: "translateY(6px)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
+          { duration: 380, easing: "ease-out" }
+        );
+      }
+    }
+
+    openBtn.addEventListener("click", openMessage);
+    code.addEventListener("keydown", (e) => { if(e.key === "Enter") openMessage(); });
+
+    document.querySelectorAll("[data-variant]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.getAttribute("data-variant");
+        const html = (variants[key] || "").replace("__SIGN__", SIGN_NAME);
+        messageBox.innerHTML = html;
+      });
+    });
+  </script>
+</body>
+</html>
